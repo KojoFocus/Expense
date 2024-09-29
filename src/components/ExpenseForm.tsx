@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
 // Interface names should start with uppercase by convention
-interface FormData { 
+interface FormData {
   description: string;
   amount: number;
   category: string;
@@ -9,7 +9,11 @@ interface FormData {
 
 const ExpenseForm = () => {
   // UseForm should have FormData as the type
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
   // Type for onSubmit should be FormData, not FieldValues
   const onSubmit = (data: FormData) => {
@@ -28,7 +32,9 @@ const ExpenseForm = () => {
           id="description"
           {...register("description", { required: true })}
         />
-        {errors.description && <p className="text-danger">Description is required</p>}
+        {errors.description && (
+          <p className="text-danger">Description is required</p>
+        )}
       </div>
 
       <div className="mb-3 px-5">
@@ -48,8 +54,13 @@ const ExpenseForm = () => {
         <label htmlFor="category" className="form-label">
           Category
         </label>
-        <select className="form-select" aria-label="Default select example" {...register("category", { required: true })}>
-          <option value="" selected disabled>Choose a category</option>
+        <select
+          className="form-select"
+          aria-label="Default select example"
+          id="category"
+          {...register("category", { required: true })}
+        >
+          <option value="selected disabled">Choose a category</option>
           <option value="groceries">Groceries</option>
           <option value="utilities">Utilities</option>
           <option value="entertainment">Entertainment</option>
