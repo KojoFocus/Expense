@@ -11,6 +11,7 @@ interface expenses {
 }
 
 const ExpenseList = ({ expenses, onDelete }: expenses) => {
+  if (expenses.length === 0) return null;
   return (
     <div className="mb-3 px-5 pt-3">
       <table className="table table-bordered ">
@@ -47,7 +48,7 @@ const ExpenseList = ({ expenses, onDelete }: expenses) => {
             </td>
             <td>
               <strong>
-                {" "}
+                Ghc
                 {expenses
                   .reduce((total, expense) => total + expense.amount, 0)
                   .toFixed(2)}
