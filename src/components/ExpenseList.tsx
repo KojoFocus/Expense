@@ -46,9 +46,12 @@ const ExpenseList = ({ expenses, onDelete }: expenses) => {
               <strong>Total</strong>
             </td>
             <td>
-              {expenses
-                .reduce((total, expense) => total + expense.amount, 0)
-                .toFixed(2)}
+              <strong>
+                {" "}
+                {expenses
+                  .reduce((total, expense) => total + expense.amount, 0)
+                  .toFixed(2)}
+              </strong>
             </td>
           </tr>
         </tfoot>
