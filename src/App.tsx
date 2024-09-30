@@ -4,6 +4,8 @@ import ExpenseList from "./components/ExpenseList";
 import ExpenseFilter from "./components/ExpenseFilter";
 
 const App = () => {
+
+  // State to store the selected category
   const [selectedCategory, setSelectedCategory] = useState("");
 
   // Initialize the list of expenses with some sample data
@@ -27,6 +29,7 @@ const App = () => {
     );
   };
 
+  // Filter the expenses based on the selected category (if any) and return the filtered list of expenses
   const visibleExpenses = selectedCategory
     ? expenses.filter((expense) => expense.category === selectedCategory)
     : expenses;
