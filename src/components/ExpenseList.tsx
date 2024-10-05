@@ -1,3 +1,5 @@
+
+
 interface Expense {
   id: number;
   description: string;
@@ -5,22 +7,25 @@ interface Expense {
   amount: number;
 }
 
-interface expenses {
+interface ExpenseListProps {
   expenses: Expense[];
   onDelete: (id: number) => void;
 }
 
-const ExpenseList = ({ expenses, onDelete }: expenses) => {
-  if (expenses.length === 0) return null;
+const ExpenseList = ({ expenses, onDelete }: ExpenseListProps) => {
+  if (expenses.length === 0) {
+    return <p className="text-center">No expenses to display.</p>;
+  }
+
   return (
     <div className="mb-3 px-5 pt-3">
-      <table className="table table-bordered ">
+      <table className="table table-bordered">
         <thead>
           <tr>
             <th>Description</th>
             <th>Category</th>
-            <th>Amount</th>
-            <th></th>
+            <th>Amount (Ghc)</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +33,11 @@ const ExpenseList = ({ expenses, onDelete }: expenses) => {
             <tr key={expense.id}>
               <td>{expense.description}</td>
               <td>{expense.category}</td>
-              <td>{expense.amount}</td>
+              <td>
+                {typeof expense.amount === 'number' 
+                  ? expense.amount.toFixed(2) 
+                  : "0.00"}
+              </td> {/* Ensuring two decimal places */}
               <td>
                 <button
                   className="btn btn-outline-danger"
@@ -42,15 +51,14 @@ const ExpenseList = ({ expenses, onDelete }: expenses) => {
         </tbody>
         <tfoot>
           <tr>
-            {/* Correct usage of colSpan to span 3 columns */}
             <td colSpan={3} className="text-end">
               <strong>Total</strong>
             </td>
             <td>
               <strong>
-                Ghc
+                Ghc{" "}
                 {expenses
-                  .reduce((total, expense) => total + expense.amount, 0)
+                  .reduce((total, expense) => total + (typeof expense.amount === 'number' ? expense.amount : 0), 0)
                   .toFixed(2)}
               </strong>
             </td>
